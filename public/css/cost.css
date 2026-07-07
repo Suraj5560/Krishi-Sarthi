@@ -1,0 +1,243 @@
+/* =======================================================
+   Krishi Sarthi — Estimated Cost Calculator
+   Concept: a farm expense receipt. Inputs read like
+   itemized receipt lines, the result like a printed total
+   with a torn edge.
+========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root{
+    --soil-900:#12210f;
+    --soil-700:#1b3d16;
+    --green-600:#2e7d32;
+    --green-500:#3f9a44;
+    --amber-500:#e8a53d;
+    --amber-600:#c9812a;
+    --cream:#f6f8ef;
+    --line:#dfe6d5;
+    --ink:#152214;
+}
+
+/* ---------- Banner ---------- */
+
+.page-banner{
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+    padding:110px 5% 90px;
+    background:linear-gradient(160deg, var(--soil-900) 0%, var(--soil-700) 45%, var(--green-600) 100%);
+    color:#f2f7ec;
+}
+
+.page-banner::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size:38px 38px;
+    mask-image:linear-gradient(to bottom, rgba(0,0,0,.6), transparent 75%);
+}
+
+.page-banner h1{ position:relative; color:#fff; font-size:2.8rem; }
+.page-banner p{ position:relative; max-width:540px; margin:0 auto; color:#d9e8cf; }
+
+.page-banner::after{
+    content:"SEEDS · FERTILIZER · LABOUR · IRRIGATION";
+    position:relative;
+    display:block;
+    margin-top:20px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7rem;
+    letter-spacing:2.5px;
+    color:var(--amber-500);
+    font-weight:600;
+}
+
+/* ---------- Form (receipt) ---------- */
+
+.form-section{ background:var(--cream); }
+
+.form-card{
+    max-width:640px;
+    margin:0 auto;
+    background:#ffffff;
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:38px 40px 34px;
+    position:relative;
+    box-shadow:0 24px 55px -22px rgba(21,34,20,.2);
+}
+
+.form-card::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height:6px;
+    background:repeating-linear-gradient(-45deg, var(--green-600) 0 10px, var(--amber-500) 10px 20px);
+}
+
+.form-card h2{
+    font-size:1.4rem;
+    text-align:center;
+    padding-bottom:18px;
+    border-bottom:2px dashed var(--line);
+    margin-bottom:8px;
+}
+
+.form-card h2::after{
+    content:"COST ESTIMATE SLIP";
+    display:block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.65rem;
+    letter-spacing:2px;
+    color:#8a9784;
+    margin-top:8px;
+    font-weight:600;
+}
+
+.form-group{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:10px 0;
+    border-bottom:1px dotted var(--line);
+}
+
+.form-group label{
+    font-size:.92rem;
+    color:var(--ink);
+    font-weight:500;
+    flex:0 0 45%;
+}
+
+.form-group input{
+    flex:1;
+    border:none;
+    border-bottom:2px solid var(--line);
+    border-radius:0;
+    background:transparent;
+    padding:6px 4px;
+    text-align:right;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.95rem;
+    margin:0;
+}
+
+.form-group input:focus{
+    border-bottom-color:var(--green-600);
+}
+
+.form-card > form .btn{
+    display:block;
+    width:100%;
+    text-align:center;
+    margin-top:24px;
+    background:linear-gradient(120deg, var(--green-600), var(--green-500));
+    border:none;
+    border-radius:10px;
+    padding:15px;
+    font-weight:600;
+    box-shadow:0 14px 28px -12px rgba(46,125,50,.5);
+}
+
+.form-card > form .btn:hover{
+    background:linear-gradient(120deg, var(--green-500), var(--amber-500));
+    transform:translateY(-3px);
+}
+
+/* ---------- Result (printed total) ---------- */
+
+.result-card{
+    max-width:640px;
+    margin:0 auto;
+    background:var(--soil-900);
+    color:#eef3e6;
+    border-radius:6px;
+    padding:34px 40px;
+    position:relative;
+    box-shadow:0 24px 55px -22px rgba(21,34,20,.35);
+}
+
+.result-card::before{
+    content:"TOTAL";
+    position:absolute;
+    top:22px;
+    right:28px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.68rem;
+    letter-spacing:2px;
+    color:var(--amber-500);
+    font-weight:600;
+}
+
+.result-card h3{ font-size:1.2rem; color:#fff; margin-bottom:14px; }
+
+.result-card p{ color:#c7d6bd; margin-bottom:8px; }
+
+.result-card p strong{
+    color:var(--amber-500);
+    font-family:'JetBrains Mono',monospace;
+    font-size:1.15rem;
+}
+
+/* ---------- Features (cost breakdown / tips) ---------- */
+
+.features{ background:var(--cream); text-align:center; }
+.features h2{ margin-bottom:46px; }
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:24px;
+    max-width:1100px;
+    margin:0 auto;
+}
+
+.feature-card{
+    background:#ffffff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:32px 22px;
+    text-align:center;
+    transition:.3s;
+}
+
+.feature-card i{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:52px;
+    height:52px;
+    border-radius:14px;
+    background:linear-gradient(135deg, var(--green-600), var(--green-500));
+    color:#fff;
+    font-size:1.2rem;
+    margin-bottom:16px;
+}
+
+.feature-card h3{ font-size:1rem; margin-bottom:8px; }
+.feature-card p{ color:#5c6b57; font-size:.9rem; margin-bottom:0; }
+
+.feature-card:hover{
+    transform:translateY(-7px);
+    border-color:var(--amber-500);
+    box-shadow:0 20px 36px -20px rgba(232,165,61,.4);
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:900px){
+    .feature-grid{ grid-template-columns:repeat(2, 1fr); }
+}
+
+@media(max-width:600px){
+    .feature-grid{ grid-template-columns:1fr; }
+    .form-card, .result-card{ padding:26px 22px; }
+    .form-group{ flex-direction:column; align-items:flex-start; gap:4px; }
+    .form-group input{ text-align:left; width:100%; }
+    .page-banner{ padding:80px 6% 60px; }
+}

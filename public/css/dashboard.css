@@ -1,0 +1,360 @@
+/* =======================================================
+   Krishi Sarthi — Farmer Dashboard
+   Concept: a field console. Stats read like sensor
+   telemetry (mono numerals), quick-access reads like a
+   plot map, activity reads like a field log.
+========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root{
+    --forest-900:#0e2a13;
+    --forest-700:#173d1c;
+    --green-600:#2e7d32;
+    --green-500:#4caf50;
+    --amber-500:#e8a53d;
+    --sky-500:#3a8fb7;
+    --cream:#f5f8f0;
+    --line:#dee7d6;
+    --ink:#16220f;
+}
+
+/* ---------- Banner ---------- */
+
+.dashboard-banner{
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+    padding:100px 5% 130px;
+    background:linear-gradient(155deg, var(--forest-900) 0%, var(--forest-700) 55%, var(--green-600) 100%);
+    color:#fff;
+}
+
+.dashboard-banner::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(ellipse at center, rgba(0,0,0,.7), transparent 70%);
+}
+
+.dashboard-banner h1{
+    position:relative;
+    font-size:2.8rem;
+    color:#fff;
+}
+
+.dashboard-banner p{
+    position:relative;
+    color:#d7e8cf;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.85rem;
+    letter-spacing:1px;
+}
+
+/* ---------- Stats (pulled up over the banner) ---------- */
+
+.dashboard-stats{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:22px;
+    max-width:1150px;
+    margin:-72px auto 0;
+    padding:0 5%;
+    position:relative;
+    z-index:2;
+}
+
+.dash-card{
+    background:#ffffff;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:28px 20px 24px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 24px 45px -22px rgba(14,42,19,.3);
+    transition:.3s;
+}
+
+.dash-card::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:4px;
+    background:linear-gradient(90deg, var(--green-600), var(--amber-500));
+}
+
+.dash-card i{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:46px;
+    height:46px;
+    border-radius:12px;
+    background:var(--cream);
+    color:var(--green-600);
+    font-size:1.15rem;
+    margin-bottom:14px;
+}
+
+.dash-card h2.counter{
+    font-family:'JetBrains Mono',monospace;
+    font-size:2rem;
+    font-weight:700;
+    color:var(--ink);
+    margin-bottom:4px;
+}
+
+.dash-card p{
+    color:#6a7a64;
+    font-size:.85rem;
+    letter-spacing:.4px;
+    margin-bottom:0;
+}
+
+.dash-card:hover{
+    transform:translateY(-6px);
+    border-color:var(--amber-500);
+}
+
+/* ---------- Quick access ---------- */
+
+.dashboard-features{
+    text-align:center;
+    background:var(--cream);
+    padding-top:70px;
+}
+
+.dashboard-features h2{
+    margin-bottom:10px;
+}
+
+.dashboard-features h2::after{
+    content:"";
+    display:block;
+    width:60px;
+    height:4px;
+    margin:14px auto 40px;
+    background:linear-gradient(90deg, var(--green-600), var(--amber-500));
+    border-radius:4px;
+}
+
+.dashboard-features .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+    max-width:1100px;
+    margin:0 auto;
+}
+
+.dashboard-features .feature-card{
+    background:#ffffff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:34px 20px;
+    text-align:center;
+    transition:.25s;
+    position:relative;
+    counter-increment:plot;
+}
+
+.dashboard-features .feature-grid{
+    counter-reset:plot;
+}
+
+.dashboard-features .feature-card::before{
+    content:"PLOT " counter(plot,decimal-leading-zero);
+    display:block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.62rem;
+    letter-spacing:1.5px;
+    color:#93a68c;
+    margin-bottom:14px;
+}
+
+.dashboard-features .feature-card i{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--green-600), var(--green-500));
+    color:#fff;
+    font-size:1.25rem;
+    margin-bottom:14px;
+}
+
+.dashboard-features .feature-card h3{
+    font-size:1rem;
+    margin-bottom:0;
+    color:var(--ink);
+}
+
+.dashboard-features .feature-card:hover{
+    transform:translateY(-8px);
+    border-color:var(--green-600);
+    box-shadow:0 22px 40px -22px rgba(46,125,50,.35);
+}
+
+/* ---------- Activity log ---------- */
+
+.activity{
+    max-width:800px;
+    margin:0 auto;
+    background:#ffffff;
+}
+
+.activity h2{
+    margin-bottom:26px;
+}
+
+.activity ul{
+    border-left:2px solid var(--line);
+    padding-left:26px;
+}
+
+.activity li{
+    position:relative;
+    padding:0 0 22px 4px;
+    color:#3d4a38;
+    font-size:.98rem;
+}
+
+.activity li::before{
+    content:"";
+    position:absolute;
+    left:-31px;
+    top:6px;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:var(--green-600);
+    box-shadow:0 0 0 4px #e3f1de;
+}
+
+.activity li:last-child{
+    padding-bottom:0;
+}
+
+/* ---------- Weather widget ---------- */
+
+.weather-widget{
+    background:var(--cream);
+}
+
+.weather-widget h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.weather-box{
+    max-width:420px;
+    margin:0 auto;
+    background:linear-gradient(150deg, var(--sky-500), #2e6c8a);
+    color:#fff;
+    border-radius:20px;
+    padding:32px 34px;
+    box-shadow:0 24px 50px -22px rgba(46,108,138,.5);
+    position:relative;
+    overflow:hidden;
+}
+
+.weather-box::before{
+    content:"";
+    position:absolute;
+    top:-30px;
+    right:-30px;
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:rgba(255,255,255,.12);
+}
+
+.weather-box h3{
+    position:relative;
+    font-size:1.4rem;
+    margin-bottom:16px;
+}
+
+.weather-box p{
+    position:relative;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.88rem;
+    color:#eaf5fb;
+    margin-bottom:8px;
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,.15);
+    padding-bottom:8px;
+}
+
+.weather-box p:last-child{
+    border-bottom:none;
+    margin-bottom:0;
+}
+
+/* ---------- CTA ---------- */
+
+.cta{
+    text-align:center;
+    background:linear-gradient(140deg, var(--forest-900), var(--green-600));
+    color:#fff;
+    border-radius:0;
+}
+
+.cta h2{
+    color:#fff;
+}
+
+.cta p{
+    color:#d7e8cf;
+    max-width:520px;
+    margin:0 auto 26px;
+}
+
+.cta .btn{
+    background:var(--amber-500);
+    color:var(--forest-900);
+    border:none;
+    font-weight:700;
+    box-shadow:0 16px 30px -14px rgba(232,165,61,.6);
+}
+
+.cta .btn:hover{
+    background:#fff;
+    transform:translateY(-3px);
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:900px){
+
+    .dashboard-stats{
+        grid-template-columns:repeat(2, 1fr);
+    }
+
+    .dashboard-features .feature-grid{
+        grid-template-columns:repeat(2, 1fr);
+    }
+}
+
+@media(max-width:600px){
+
+    .dashboard-stats{
+        grid-template-columns:1fr;
+        margin-top:-40px;
+    }
+
+    .dashboard-features .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard-banner{
+        padding:80px 6% 110px;
+    }
+}

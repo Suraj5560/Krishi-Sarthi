@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profit Prediction | Krishi Sarthi</title>
+
+    <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/profit.css">
+</head>
+<body>
+
+ 
+<%- include("partials/navbar") %>
+  <%- include("partials/flash") %> 
+
+<!-- Banner -->
+
+<section class="page-banner">
+
+    <h1>💰 Profit Prediction</h1>
+
+    <p>
+        Estimate your expected farming profit before cultivation.
+    </p>
+
+</section>
+
+<!-- Profit Form -->
+
+<section class="form-section">
+
+<div class="form-card">
+
+<h2>Enter Farming Details</h2>
+
+<form action="/profit" method="POST">
+
+<div class="form-group">
+<label>Crop Name</label>
+<input type="text" name="crop" required>
+</div>
+
+<div class="form-group">
+<label>Land Area (Acres)</label>
+<input type="number" step="0.1" name="land" required>
+</div>
+
+<div class="form-group">
+<label>Expected Yield (Quintals)</label>
+<input type="number" step="0.1" name="yield" required>
+</div>
+
+<div class="form-group">
+<label>Market Price (₹/Quintal)</label>
+<input type="number" name="price" required>
+</div>
+
+<div class="form-group">
+<label>Total Estimated Cost (₹)</label>
+<input type="number" name="cost" required>
+</div>
+
+<button type="submit" class="btn">
+Calculate Profit
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- Result -->
+
+<section class="form-section">
+
+<div class="result-card">
+
+<h3>Estimated Result</h3>
+
+<p><strong>Total Revenue:</strong> ₹0</p>
+
+<p><strong>Total Cost:</strong> ₹0</p>
+
+<p><strong>Estimated Profit:</strong> ₹0</p>
+
+<p>
+Your calculated profit will appear here after submitting the form.
+</p>
+
+</div>
+
+</section>
+
+<!-- Benefits -->
+
+<section class="features">
+
+<h2>Why Use Profit Prediction?</h2>
+
+<div class="feature-grid">
+
+<div class="feature-card">
+<i class="fas fa-chart-line"></i>
+<h3>Better Planning</h3>
+<p>Estimate earnings before cultivation.</p>
+</div>
+
+<div class="feature-card">
+<i class="fas fa-coins"></i>
+<h3>Financial Decisions</h3>
+<p>Compare expenses and expected income.</p>
+</div>
+
+<div class="feature-card">
+<i class="fas fa-seedling"></i>
+<h3>Increase Profit</h3>
+<p>Select crops that provide better returns.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- Tips -->
+
+<section class="features">
+
+<h2>Profit Improvement Tips</h2>
+
+<div class="feature-grid">
+
+<div class="feature-card">
+<h3>🌱 Choose Suitable Crops</h3>
+<p>Select crops according to soil and climate.</p>
+</div>
+
+<div class="feature-card">
+<h3>💧 Reduce Water Wastage</h3>
+<p>Use efficient irrigation methods.</p>
+</div>
+
+<div class="feature-card">
+<h3>📈 Sell at Right Time</h3>
+<p>Monitor market prices before selling.</p>
+</div>
+
+
+</div>
+
+</section>
+
+<%- include("partials/footer") %>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/profit.js"></script>
+
+
+</body>
+</html>

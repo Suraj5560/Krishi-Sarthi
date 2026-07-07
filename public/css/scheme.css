@@ -1,0 +1,232 @@
+/* ===========================
+   Government Schemes Page
+=========================== */
+
+:root{
+    --primary:#2e7d32;
+    --navy:#1a237e;
+    --saffron:#ef6c00;
+    --light:#f4f7ff;
+    --border:#dce7dc;
+    --shadow:0 12px 30px rgba(0,0,0,0.08);
+    --transition:0.3s ease;
+}
+
+/* Banner */
+
+.page-banner{
+    background:linear-gradient(135deg,#1a237e,#2e7d32);
+    color:#fff;
+    text-align:center;
+    padding:70px 20px;
+}
+
+.page-banner h1{
+    font-size:42px;
+    margin-bottom:15px;
+    font-weight:700;
+    color:#fff;
+}
+
+.page-banner p{
+    max-width:700px;
+    margin:auto;
+    font-size:18px;
+    line-height:1.7;
+    opacity:.95;
+    color:#fff;
+}
+
+/* Search Form */
+
+.form-section{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:60px 20px;
+    background:#f8faf8;
+}
+
+.form-card{
+    width:100%;
+    max-width:700px;
+    background:#fff;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    animation:fadeUp .6s ease;
+}
+
+.form-card h2{
+    text-align:center;
+    color:var(--navy);
+    margin-bottom:30px;
+    font-size:30px;
+}
+
+form{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    font-weight:600;
+    margin-bottom:8px;
+    color:#444;
+}
+
+.form-group select{
+    padding:14px 15px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    font-size:16px;
+    background:#fafafa;
+    transition:var(--transition);
+}
+
+.form-group select:focus{
+    border-color:var(--navy);
+    background:#fff;
+    outline:none;
+    box-shadow:0 0 8px rgba(26,35,126,.2);
+}
+
+.btn{
+    grid-column:1/-1;
+    padding:16px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#1a237e,#ef6c00);
+    color:#fff;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    text-align:center;
+}
+
+.btn:hover{
+    background:linear-gradient(135deg,#0d1657,#c85800);
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(26,35,126,.25);
+}
+
+/* Feature Grids (Scheme Cards / Eligibility) */
+
+.features{
+    padding:75px 20px;
+    text-align:center;
+    background:#fff;
+}
+
+.features h2{
+    color:var(--navy);
+    font-size:34px;
+    margin-bottom:45px;
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:28px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.feature-card{
+    background:#fff;
+    border-radius:18px;
+    padding:32px 22px;
+    box-shadow:var(--shadow);
+    transition:.3s;
+    border-top:4px solid var(--saffron);
+}
+
+.feature-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
+
+.feature-card i{
+    font-size:46px;
+    color:var(--navy);
+    margin-bottom:16px;
+}
+
+.feature-card h3{
+    font-size:21px;
+    margin-bottom:10px;
+    color:#222;
+}
+
+.feature-card p{
+    color:#666;
+    line-height:1.65;
+    margin-bottom:0;
+}
+
+/* CTA / Result Card */
+
+.result-card{
+    width:100%;
+    max-width:700px;
+    margin:0 auto;
+    background:linear-gradient(135deg,#f4f7ff,#fff);
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    border-left:8px solid var(--saffron);
+}
+
+.result-card h3{
+    color:var(--navy);
+    margin-bottom:16px;
+    font-size:26px;
+}
+
+.result-card p{
+    font-size:17px;
+    color:#555;
+    line-height:1.8;
+    margin-bottom:22px;
+}
+
+.result-card .btn{
+    display:inline-block;
+    grid-column:unset;
+}
+
+/* Animation */
+
+@keyframes fadeUp{
+    from{ opacity:0; transform:translateY(40px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .page-banner h1{ font-size:32px; }
+    .page-banner p{ font-size:16px; }
+    .form-card{ padding:25px; }
+    form{ grid-template-columns:1fr; }
+    .features h2{ font-size:28px; }
+
+}
+
+@media(max-width:480px){
+
+    .page-banner{ padding:50px 15px; }
+    .page-banner h1{ font-size:26px; }
+    .form-card h2{ font-size:24px; }
+    .feature-card{ padding:24px; }
+    .feature-card i{ font-size:38px; }
+}

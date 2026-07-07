@@ -1,0 +1,268 @@
+/* =======================================================
+   Krishi Sarthi — AI Chatbot
+   Concept: a phone chat app. The conversation lives inside
+   a "device window" with a header bar, bubble messages,
+   and a pill-shaped composer.
+========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root{
+    --forest-900:#0e2a13;
+    --forest-700:#173d1c;
+    --green-600:#2e7d32;
+    --green-500:#4caf50;
+    --amber-500:#e8a53d;
+    --cream:#f5f8f0;
+    --line:#dee7d6;
+    --ink:#16220f;
+}
+
+/* ---------- Banner ---------- */
+
+.page-banner{
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+    padding:100px 5% 80px;
+    background:linear-gradient(155deg, var(--forest-900) 0%, var(--forest-700) 55%, var(--green-600) 100%);
+    color:#fff;
+}
+
+.page-banner::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size:40px 40px;
+    mask-image:radial-gradient(ellipse at center, rgba(0,0,0,.65), transparent 70%);
+}
+
+.page-banner h1{ position:relative; color:#fff; font-size:2.8rem; }
+.page-banner p{ position:relative; color:#d7e8cf; max-width:520px; margin:0 auto; }
+
+.page-banner::after{
+    content:"ONLINE · RESPONDS IN SECONDS";
+    position:relative;
+    display:block;
+    margin-top:18px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7rem;
+    letter-spacing:3px;
+    color:#9fe6a6;
+    font-weight:600;
+}
+
+/* ---------- Chat window ---------- */
+
+.chat-container{
+    max-width:720px;
+    margin:0 auto;
+    background:#ffffff;
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    box-shadow:0 28px 60px -24px rgba(14,42,19,.28);
+}
+
+.chat-header{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:20px 26px;
+    background:var(--forest-900);
+    color:#fff;
+}
+
+.chat-header i{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--green-600), var(--green-500));
+    font-size:1.1rem;
+}
+
+.chat-header h2{
+    font-size:1.15rem;
+    color:#fff;
+    margin:0;
+}
+
+.chat-header::after{
+    content:"";
+    width:10px;
+    height:10px;
+    margin-left:auto;
+    border-radius:50%;
+    background:#4caf50;
+    box-shadow:0 0 0 4px rgba(76,175,80,.25);
+}
+
+.chat-body{
+    padding:28px 26px;
+    background:var(--cream);
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    min-height:220px;
+}
+
+.message{
+    max-width:80%;
+    padding:14px 18px;
+    border-radius:16px;
+    background:#ffffff;
+    border:1px solid var(--line);
+    color:var(--ink);
+    font-size:.95rem;
+    box-shadow:0 8px 18px -12px rgba(14,42,19,.15);
+}
+
+.message strong{
+    display:block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.68rem;
+    letter-spacing:1px;
+    color:var(--green-600);
+    margin-bottom:6px;
+    text-transform:uppercase;
+}
+
+/* AI messages align left, user messages align right & tint green */
+
+.message:nth-child(odd){
+    align-self:flex-start;
+    border-bottom-left-radius:4px;
+}
+
+.message:nth-child(even){
+    align-self:flex-end;
+    background:linear-gradient(135deg, var(--green-600), var(--green-500));
+    color:#fff;
+    border:none;
+    border-bottom-right-radius:4px;
+}
+
+.message:nth-child(even) strong{
+    color:#e6f4e1;
+}
+
+.chat-input{
+    padding:18px 22px 24px;
+    background:#ffffff;
+    border-top:1px solid var(--line);
+}
+
+.chat-input form{
+    display:flex;
+    gap:10px;
+}
+
+.chat-input input{
+    flex:1;
+    border:1px solid var(--line);
+    border-radius:30px;
+    padding:14px 20px;
+    background:var(--cream);
+    font-family:'Poppins',sans-serif;
+}
+
+.chat-input input:focus{
+    border-color:var(--green-600);
+    background:#eef5e6;
+}
+
+.chat-input button{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    border:none;
+    border-radius:30px;
+    padding:14px 26px;
+    background:linear-gradient(120deg, var(--green-600), var(--green-500));
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.chat-input button:hover{
+    background:linear-gradient(120deg, var(--green-500), var(--amber-500));
+    transform:translateY(-2px);
+}
+
+/* ---------- Feature sections ---------- */
+
+.features{
+    background:var(--cream);
+    text-align:center;
+}
+
+.features h2{
+    margin-bottom:44px;
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:22px;
+    max-width:1150px;
+    margin:0 auto;
+}
+
+.feature-card{
+    background:#ffffff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:30px 20px;
+    text-align:center;
+    transition:.3s;
+}
+
+.feature-card i{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:50px;
+    height:50px;
+    border-radius:12px;
+    background:linear-gradient(135deg, var(--green-600), var(--green-500));
+    color:#fff;
+    font-size:1.2rem;
+    margin-bottom:14px;
+}
+
+.feature-card h3{
+    font-size:1rem;
+    margin-bottom:6px;
+}
+
+.feature-card p{
+    color:#5c6b57;
+    font-size:.9rem;
+    margin-bottom:0;
+}
+
+.feature-card:hover{
+    transform:translateY(-7px);
+    border-color:var(--amber-500);
+    box-shadow:0 20px 36px -20px rgba(232,165,61,.4);
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:900px){
+    .feature-grid{ grid-template-columns:repeat(2, 1fr); }
+}
+
+@media(max-width:600px){
+    .feature-grid{ grid-template-columns:1fr; }
+    .message{ max-width:92%; }
+    .chat-input form{ flex-direction:column; }
+    .chat-input button{ justify-content:center; }
+}

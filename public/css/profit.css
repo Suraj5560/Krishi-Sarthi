@@ -1,0 +1,239 @@
+/* ===========================
+   Profit Prediction Page
+=========================== */
+
+:root{
+    --primary:#2e7d32;
+    --primary-dark:#1b5e20;
+    --secondary:#66bb6a;
+    --gold:#2b1111;
+    --light:#f4fff4;
+    --white:#ffffff;
+    --text:#333;
+    --gray:#777;
+    --border:#dce7dc;
+    --shadow:0 12px 30px rgba(0,0,0,0.08);
+    --radius:16px;
+    --transition:0.3s ease;
+}
+
+/* Banner */
+
+.page-banner{
+    background:linear-gradient(135deg,#1b5e20,#f9a825);
+    color:#fff;
+    text-align:center;
+    padding:70px 20px;
+}
+
+.page-banner h1{
+    font-size:42px;
+    margin-bottom:15px;
+    font-weight:700;
+    color:#fff;
+}
+
+.page-banner p{
+    max-width:700px;
+    margin:auto;
+    font-size:18px;
+    line-height:1.7;
+    opacity:.95;
+    color:#fff;
+}
+
+/* Form Section */
+
+.form-section{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:60px 20px;
+    background:#f8faf8;
+}
+
+.form-card{
+    width:100%;
+    max-width:700px;
+    background:#fff;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    animation:fadeUp .6s ease;
+}
+
+.form-card h2{
+    text-align:center;
+    color:var(--primary);
+    margin-bottom:30px;
+    font-size:32px;
+}
+
+form{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    font-weight:600;
+    margin-bottom:8px;
+    color:#444;
+}
+
+.form-group input{
+    padding:14px 15px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    font-size:16px;
+    transition:var(--transition);
+    background:#fafafa;
+}
+
+.form-group input:focus{
+    border-color:var(--primary);
+    background:#fff;
+    outline:none;
+    box-shadow:0 0 8px rgba(46,125,50,.25);
+}
+
+/* Button Full Width */
+
+.btn{
+    grid-column:1/-1;
+    padding:16px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#2e7d32,#f9a825);
+    color:#fff;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:linear-gradient(135deg,#1b5e20,#f57f17);
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(46,125,50,.25);
+}
+
+/* Result Card */
+
+.result-card{
+    width:100%;
+    max-width:700px;
+    margin:0 auto;
+    background:#fff;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    animation:fadeUp .6s ease;
+    border-left:8px solid var(--gold);
+}
+
+.result-card h3{
+    color:var(--primary);
+    margin-bottom:20px;
+    font-size:28px;
+}
+
+.result-card p{
+    font-size:18px;
+    color:#555;
+    line-height:1.8;
+}
+
+.result-card p strong{
+    color:#222;
+}
+
+/* Features */
+
+.features{
+    padding:80px 20px;
+    text-align:center;
+    background:#fff;
+}
+
+.features h2{
+    color:var(--primary);
+    font-size:36px;
+    margin-bottom:50px;
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.feature-card{
+    background:#fff;
+    border-radius:18px;
+    padding:35px 25px;
+    box-shadow:var(--shadow);
+    transition:.35s;
+}
+
+.feature-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
+
+.feature-card i{
+    font-size:50px;
+    color:var(--gold);
+    margin-bottom:20px;
+}
+
+.feature-card h3{
+    font-size:22px;
+    margin-bottom:12px;
+    color:#222;
+}
+
+.feature-card p{
+    color:#666;
+    line-height:1.7;
+}
+
+/* Animation */
+
+@keyframes fadeUp{
+    from{ opacity:0; transform:translateY(40px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .page-banner h1{ font-size:32px; }
+    .page-banner p{ font-size:16px; }
+    .form-card,
+    .result-card{ padding:25px; }
+    form{ grid-template-columns:1fr; }
+    .btn{ width:100%; }
+    .features h2{ font-size:30px; }
+
+}
+
+@media(max-width:480px){
+
+    .page-banner{ padding:50px 15px; }
+    .page-banner h1{ font-size:28px; }
+    .form-card h2{ font-size:26px; }
+    .feature-card{ padding:25px; }
+    .feature-card i{ font-size:42px; }
+    .feature-card h3{ font-size:20px; }
+
+}

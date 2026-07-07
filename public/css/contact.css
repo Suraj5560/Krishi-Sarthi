@@ -1,0 +1,242 @@
+/* =======================================================
+   Krishi Sarthi — Contact
+   Concept: a field note & seed packet. The info panel
+   reads like a postcard from the field, the form like the
+   back of a seed packet — dashed edge, stamped corner.
+========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root{
+    --forest-900:#0e2a13;
+    --forest-700:#173d1c;
+    --green-600:#2e7d32;
+    --green-500:#4caf50;
+    --amber-500:#e8a53d;
+    --cream:#f5f8f0;
+    --line:#dee7d6;
+    --ink:#16220f;
+}
+
+/* ---------- Hero ---------- */
+
+.contact-hero{
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+    padding:110px 5% 90px;
+    background:linear-gradient(155deg, var(--forest-900) 0%, var(--forest-700) 55%, var(--green-600) 100%);
+    color:#fff;
+}
+
+.contact-hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size:40px 40px;
+    mask-image:radial-gradient(ellipse at center, rgba(0,0,0,.65), transparent 70%);
+}
+
+.contact-hero h1{
+    position:relative;
+    color:#fff;
+    font-size:2.9rem;
+}
+
+.contact-hero p{
+    position:relative;
+    color:#d7e8cf;
+}
+
+.contact-hero::after{
+    content:"WE REPLY WITHIN 24 HOURS";
+    position:relative;
+    display:block;
+    margin-top:18px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7rem;
+    letter-spacing:3px;
+    color:#9fe6a6;
+    font-weight:600;
+}
+
+/* ---------- Contact grid ---------- */
+
+.contact{
+    display:grid;
+    grid-template-columns:.85fr 1.15fr;
+    gap:44px;
+    align-items:start;
+    background:var(--cream);
+}
+
+/* Info panel = field postcard */
+
+.contact-info{
+    background:var(--forest-900);
+    color:#fff;
+    border-radius:20px;
+    padding:40px 36px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 24px 55px -22px rgba(14,42,19,.4);
+}
+
+.contact-info::before{
+    content:"KS";
+    position:absolute;
+    top:24px;
+    right:26px;
+    width:46px;
+    height:46px;
+    border:2px solid var(--amber-500);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'JetBrains Mono',monospace;
+    font-weight:700;
+    color:var(--amber-500);
+    font-size:.85rem;
+    transform:rotate(8deg);
+}
+
+.contact-info h2{
+    color:#fff;
+    font-size:1.6rem;
+    margin-bottom:14px;
+}
+
+.contact-info p{
+    color:#cfe0c6;
+}
+
+.contact-info p i{
+    color:var(--amber-500);
+    width:22px;
+    margin-right:8px;
+}
+
+.social-icons{
+    margin-top:24px;
+    display:flex;
+    gap:12px;
+}
+
+.social-icons a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.15);
+    transition:.25s;
+}
+
+.social-icons a:hover{
+    background:var(--amber-500);
+    color:var(--forest-900);
+    transform:translateY(-4px);
+}
+
+/* Form = seed packet */
+
+.contact-form{
+    background:#ffffff;
+    border-radius:20px;
+    padding:40px 40px 34px;
+    position:relative;
+    box-shadow:0 24px 55px -22px rgba(14,42,19,.18);
+}
+
+.contact-form::before{
+    content:"";
+    position:absolute;
+    inset:14px;
+    border:2px dashed var(--line);
+    border-radius:14px;
+    pointer-events:none;
+}
+
+.contact-form form{
+    position:relative;
+    display:grid;
+    gap:4px;
+}
+
+.contact-form input,
+.contact-form textarea{
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--cream);
+    padding:14px 16px;
+    font-family:'Poppins',sans-serif;
+    transition:.25s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+    border-color:var(--green-600);
+    background:#eef5e6;
+    box-shadow:0 8px 18px -12px rgba(46,125,50,.4);
+}
+
+.contact-form .btn{
+    justify-self:start;
+    margin-top:6px;
+    background:linear-gradient(120deg, var(--green-600), var(--green-500));
+    border:none;
+    border-radius:12px;
+    padding:15px 40px;
+    font-weight:600;
+    box-shadow:0 14px 28px -12px rgba(46,125,50,.55);
+}
+
+.contact-form .btn:hover{
+    background:linear-gradient(120deg, var(--green-500), var(--amber-500));
+    transform:translateY(-3px);
+}
+
+/* ---------- Map ---------- */
+
+.map{
+    text-align:center;
+    background:#ffffff;
+}
+
+.map h2{
+    margin-bottom:26px;
+}
+
+.map-box{
+    max-width:1000px;
+    margin:0 auto;
+    border-radius:18px;
+    overflow:hidden;
+    border:6px solid var(--cream);
+    box-shadow:0 24px 50px -25px rgba(14,42,19,.25);
+}
+
+.map-box iframe{
+    display:block;
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:900px){
+
+    .contact{
+        grid-template-columns:1fr;
+    }
+
+    .contact-form,
+    .contact-info{
+        padding:32px 26px;
+    }
+}

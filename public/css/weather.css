@@ -1,0 +1,240 @@
+/* ===========================
+   Weather Forecast Page
+=========================== */
+
+:root{
+    --primary:#2e7d32;
+    --sky:#0288d1;
+    --sky-dark:#01579b;
+    --light:#f0f9ff;
+    --white:#ffffff;
+    --border:#dce7dc;
+    --shadow:0 12px 30px rgba(0,0,0,0.08);
+    --radius:16px;
+    --transition:0.3s ease;
+}
+
+/* Banner */
+
+.page-banner{
+    background:linear-gradient(135deg,#0288d1,#66bb6a);
+    color:#fff;
+    text-align:center;
+    padding:70px 20px;
+}
+
+.page-banner h1{
+    font-size:42px;
+    margin-bottom:15px;
+    font-weight:700;
+    color:#fff;
+}
+
+.page-banner p{
+    max-width:700px;
+    margin:auto;
+    font-size:18px;
+    line-height:1.7;
+    opacity:.95;
+    color:#fff;
+}
+
+/* Search Form */
+
+.form-section{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:50px 20px;
+    background:#f8faf8;
+}
+
+.form-card{
+    width:100%;
+    max-width:600px;
+    background:#fff;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    animation:fadeUp .6s ease;
+}
+
+.form-card h2{
+    text-align:center;
+    color:var(--sky);
+    margin-bottom:25px;
+    font-size:30px;
+}
+
+.form-group label{
+    font-weight:600;
+    margin-bottom:8px;
+    display:block;
+    color:#444;
+}
+
+.form-group input{
+    padding:14px 15px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    font-size:16px;
+    background:#fafafa;
+    transition:var(--transition);
+}
+
+.form-group input:focus{
+    border-color:var(--sky);
+    background:#fff;
+    outline:none;
+    box-shadow:0 0 8px rgba(2,136,209,.25);
+}
+
+.btn{
+    display:block;
+    width:100%;
+    padding:16px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#0288d1,#01579b);
+    color:#fff;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+    text-align:center;
+}
+
+.btn:hover{
+    background:linear-gradient(135deg,#01579b,#014377);
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(2,136,209,.25);
+}
+
+/* Current Weather Cards */
+
+.weather-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:25px;
+    max-width:1100px;
+    margin:0 auto;
+    padding:20px 5% 80px;
+}
+
+.weather-card{
+    background:linear-gradient(160deg,#e1f5fe,#ffffff);
+    border-radius:18px;
+    padding:35px 20px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    transition:.3s;
+    border:1px solid #d5efff;
+}
+
+.weather-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
+
+.weather-card i{
+    font-size:44px;
+    color:var(--sky);
+    margin-bottom:15px;
+}
+
+.weather-card h3{
+    font-size:16px;
+    color:#666;
+    font-weight:600;
+    margin-bottom:8px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+}
+
+.weather-card p{
+    font-size:26px;
+    font-weight:700;
+    color:#222;
+    margin-bottom:0;
+}
+
+/* Features (Forecast + Advisory) */
+
+.features{
+    padding:70px 20px;
+    text-align:center;
+    background:#fff;
+}
+
+.features h2{
+    color:var(--sky);
+    font-size:34px;
+    margin-bottom:45px;
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:25px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.feature-card{
+    background:#fff;
+    border-radius:18px;
+    padding:30px 20px;
+    box-shadow:var(--shadow);
+    transition:.3s;
+}
+
+.feature-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
+
+.feature-card i{
+    font-size:42px;
+    color:var(--sky);
+    margin-bottom:15px;
+}
+
+.feature-card h3{
+    font-size:20px;
+    margin-bottom:10px;
+    color:#222;
+}
+
+.feature-card p{
+    color:#666;
+    line-height:1.6;
+    margin-bottom:0;
+}
+
+/* Animation */
+
+@keyframes fadeUp{
+    from{ opacity:0; transform:translateY(40px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .page-banner h1{ font-size:32px; }
+    .page-banner p{ font-size:16px; }
+    .form-card{ padding:25px; }
+    .weather-container{ grid-template-columns:repeat(2,1fr); }
+    .features h2{ font-size:28px; }
+
+}
+
+@media(max-width:480px){
+
+    .page-banner{ padding:50px 15px; }
+    .page-banner h1{ font-size:26px; }
+    .weather-container{ grid-template-columns:1fr; padding-bottom:60px; }
+    .weather-card p{ font-size:22px; }
+
+}

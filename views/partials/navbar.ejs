@@ -1,0 +1,61 @@
+<header>
+
+<nav class="navbar">
+
+    <!-- Logo -->
+
+    <a href="/" class="logo">
+   🌿 Krishi sarthi
+    </a>
+
+    <!-- Navigation Links -->
+
+    <ul class="nav-links">
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/about">About</a></li>
+
+        <li><a href="/dashboard">Dashboard</a></li>
+
+        <li><a href="/crop">Crop</a></li>
+
+        <li><a href="/disease">Disease</a></li>
+
+        <li><a href="/profit">Profit</a></li>
+
+        <li><a href="/cost">Cost</a></li>
+
+        <li><a href="/weather">Weather</a></li>
+
+        <li><a href="/schemes">Schemes</a></li>
+
+        <li><a href="/contact">Contact</a></li>
+
+    </ul>
+
+    <!-- Right Side -->
+ <% if(!currUser){ %>
+    <div class="nav-right">
+
+        <a href="/user/login" class="login-btn">
+            Login
+        </a>
+
+        <a href="/user/signup" class="register-btn">
+            Register
+        </a>
+
+    </div>
+   
+     <%} %>
+     <% if(currUser){ %>
+         <div class="nav-right"></div>
+           <a class="login-btn" href="/user/logout"><strong></strong>Logout</strong></a>
+           </div>
+    <%} %>
+    
+
+</nav>
+
+</header>

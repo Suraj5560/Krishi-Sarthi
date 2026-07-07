@@ -1,0 +1,120 @@
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 5%;
+    background:rgba(251,248,239,.85);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(33,48,31,.08);
+    transition:padding .25s ease, box-shadow .25s ease;
+}
+
+.navbar.scrolled{
+    padding:10px 5%;
+    box-shadow:0 8px 24px rgba(33,48,31,.08);
+}
+
+.logo{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:19px;
+    font-weight:700;
+    color:var(--field-dark);
+    text-decoration:none;
+    margin-right:60px;
+    letter-spacing:-.01em;
+}
+
+.nav-links{
+    display:flex;
+    list-style:none;
+    gap:26px;
+    margin:0 auto;
+}
+
+.nav-links li{
+    list-style:none;
+}
+
+.nav-links a{
+    position:relative;
+    text-decoration:none;
+    color:var(--ink);
+    font-weight:500;
+    font-size:14.5px;
+    padding-bottom:4px;
+}
+
+.nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:0;
+    height:2px;
+    background:var(--turmeric);
+    transition:width .25s ease;
+}
+
+.nav-links a:hover{
+    color:var(--field-dark);
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-left:40px;
+}
+
+.login-btn,
+.register-btn{
+    padding:9px 22px;
+    border-radius:24px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:14px;
+    transition:transform .2s ease, background .2s ease, color .2s ease;
+}
+
+.login-btn{
+    border:1.5px solid var(--field);
+    color:var(--field-dark);
+    background:transparent;
+}
+
+.login-btn:hover{
+    background:var(--field);
+    color:#fff;
+    transform:translateY(-2px);
+}
+
+.register-btn{
+    border:none;
+    background:var(--turmeric);
+    color:#fff;
+}
+
+.register-btn:hover{
+    background:var(--turmeric-dark);
+    transform:translateY(-2px);
+}
+
+@media(max-width:900px){
+    .nav-links{
+        display:none;
+    }
+    .logo{
+        margin-right:auto;
+    }
+}

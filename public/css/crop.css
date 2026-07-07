@@ -1,0 +1,308 @@
+/* =======================================================
+   Krishi Sarthi — Crop Recommendation
+   Concept: a soil-sample readout. The page behaves like a
+   sensor panel — inputs are "readings", the result is a
+   growth gauge. Mono type = data, Poppins = the human voice.
+========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root{
+    --soil-900:#12210f;
+    --soil-700:#1b3d16;
+    --green-600:#2e7d32;
+    --green-500:#3f9a44;
+    --amber-500:#e8a53d;
+    --amber-600:#c9812a;
+    --cream:#f6f8ef;
+    --line:#dfe6d5;
+    --ink:#152214;
+}
+
+/* ---------- Banner ---------- */
+
+.page-banner{
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+    padding:110px 5% 90px;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(232,165,61,.18), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(63,154,68,.25), transparent 50%),
+        linear-gradient(160deg, var(--soil-900) 0%, var(--soil-700) 45%, var(--green-600) 100%);
+    color:#f2f7ec;
+}
+
+.page-banner::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size:38px 38px;
+    mask-image:linear-gradient(to bottom, rgba(0,0,0,.6), transparent 75%);
+    pointer-events:none;
+}
+
+.page-banner h1{
+    position:relative;
+    color:#ffffff;
+    font-size:2.9rem;
+    letter-spacing:.5px;
+}
+
+.page-banner p{
+    position:relative;
+    max-width:560px;
+    margin:0 auto;
+    color:#d9e8cf;
+    font-size:1.05rem;
+}
+
+.page-banner::after{
+    content:"SOIL · CLIMATE · YIELD";
+    position:relative;
+    display:block;
+    margin-top:22px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:3px;
+    color:var(--amber-500);
+    font-weight:600;
+}
+
+/* ---------- Form section ---------- */
+
+.form-section{
+    background:var(--cream);
+}
+
+.form-card{
+    max-width:900px;
+    margin:0 auto;
+    background:#ffffff;
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:44px 40px 36px;
+    position:relative;
+    box-shadow:0 24px 55px -20px rgba(21,34,20,.18);
+}
+
+.form-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:26px;
+    right:26px;
+    height:6px;
+    border-radius:0 0 8px 8px;
+    background:linear-gradient(90deg, var(--green-600), var(--amber-500));
+}
+
+.form-card h2{
+    font-size:1.5rem;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:6px;
+}
+
+.form-card h2::before{
+    content:"01";
+    font-family:'JetBrains Mono',monospace;
+    font-size:.75rem;
+    color:#fff;
+    background:var(--green-600);
+    padding:4px 9px;
+    border-radius:6px;
+    font-weight:700;
+}
+
+.form-card > form{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:4px 28px;
+    margin-top:22px;
+}
+
+.form-group{
+    position:relative;
+}
+
+.form-group label{
+    display:block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.68rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--green-600);
+    font-weight:600;
+    margin-bottom:6px;
+}
+
+.form-group input{
+    border:none;
+    border-bottom:2px solid var(--line);
+    border-radius:6px 6px 0 0;
+    background:var(--cream);
+    padding:12px 14px;
+    font-family:'Poppins',sans-serif;
+    font-size:.98rem;
+    color:var(--ink);
+    transition:.25s;
+}
+
+.form-group input:focus{
+    border-bottom-color:var(--green-600);
+    background:#eef5e6;
+    box-shadow:0 6px 14px -8px rgba(46,125,50,.5);
+}
+
+.form-card > form .btn{
+    grid-column:1 / -1;
+    justify-self:start;
+    margin-top:18px;
+    background:linear-gradient(120deg, var(--green-600), var(--green-500));
+    border:none;
+    border-radius:12px;
+    padding:16px 44px;
+    font-weight:600;
+    letter-spacing:.3px;
+    box-shadow:0 14px 30px -12px rgba(46,125,50,.55);
+}
+
+.form-card > form .btn:hover{
+    background:linear-gradient(120deg, var(--green-500), var(--amber-500));
+    transform:translateY(-3px);
+}
+
+/* ---------- Result card ---------- */
+
+.result-card{
+    max-width:900px;
+    margin:0 auto;
+    background:var(--soil-900);
+    color:#eef3e6;
+    border-radius:22px;
+    padding:38px 40px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 24px 55px -20px rgba(21,34,20,.35);
+}
+
+.result-card::before{
+    content:"RESULT";
+    position:absolute;
+    top:22px;
+    right:28px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.68rem;
+    letter-spacing:2px;
+    color:var(--amber-500);
+    font-weight:600;
+}
+
+.result-card h3{
+    font-size:1.3rem;
+    color:#ffffff;
+    margin-bottom:14px;
+}
+
+.result-card p{
+    color:#c7d6bd;
+    margin-bottom:0;
+}
+
+.result-card::after{
+    content:"";
+    display:block;
+    margin-top:22px;
+    height:8px;
+    width:100%;
+    border-radius:20px;
+    background:
+        linear-gradient(90deg, var(--green-500) 0%, var(--amber-500) 35%, rgba(255,255,255,.08) 35%);
+    background-size:100% 100%;
+}
+
+/* ---------- Features ---------- */
+
+.features{
+    background:var(--cream);
+    text-align:center;
+}
+
+.features h2{
+    margin-bottom:50px;
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+    max-width:1100px;
+    margin:0 auto;
+}
+
+.feature-card{
+    background:#ffffff;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:38px 26px 30px;
+    text-align:center;
+    transition:.3s;
+    position:relative;
+}
+
+.feature-card i{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:58px;
+    height:58px;
+    border-radius:14px;
+    background:linear-gradient(135deg, var(--green-600), var(--green-500));
+    color:#fff;
+    font-size:1.35rem;
+    margin-bottom:18px;
+}
+
+.feature-card h3{
+    font-size:1.1rem;
+    margin-bottom:8px;
+}
+
+.feature-card p{
+    color:#5c6b57;
+    font-size:.95rem;
+    margin-bottom:0;
+}
+
+.feature-card:hover{
+    transform:translateY(-8px);
+    border-color:var(--amber-500);
+    box-shadow:0 22px 40px -22px rgba(232,165,61,.45);
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:768px){
+
+    .form-card > form{
+        grid-template-columns:1fr;
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-card,
+    .result-card{
+        padding:30px 22px;
+    }
+
+    .page-banner{
+        padding:80px 6% 60px;
+    }
+}

@@ -1,0 +1,285 @@
+/* ===================== Base ===================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f9fbf7;
+    color:#222;
+    line-height:1.8;
+}
+
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+}
+
+section{
+    padding:80px 0;
+}
+
+h2{
+    color:#111;
+    font-size:2rem;
+    font-weight:600;
+    margin-bottom:20px;
+}
+
+.section-tag{
+    display:inline-block;
+    background:#eaf6ec;
+    color:#2e7d32;
+    font-weight:600;
+    font-size:0.8rem;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    padding:6px 16px;
+    border-radius:20px;
+    margin-bottom:14px;
+}
+
+.section-tag.center{
+    display:block;
+    text-align:center;
+    width:fit-content;
+    margin:0 auto 14px;
+}
+
+/* ===================== Hero ===================== */
+
+.hero{
+    background:linear-gradient(135deg,#2e7d32,#66bb6a);
+    color:#fff;
+    text-align:center;
+    padding:90px 20px;
+}
+
+.hero-content{
+    max-width:700px;
+    margin:auto;
+}
+
+.hero-badge{
+    display:inline-block;
+    background:rgba(255,255,255,0.18);
+    padding:8px 18px;
+    border-radius:30px;
+    font-size:0.85rem;
+    font-weight:500;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:3rem;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.hero p{
+    font-size:1.2rem;
+    opacity:0.95;
+}
+
+/* ===================== About ===================== */
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.about-text p{
+    font-size:17px;
+    color:#555;
+    margin-bottom:16px;
+}
+
+.about-stats{
+    display:grid;
+    gap:20px;
+}
+
+.stat-card{
+    background:#fff;
+    border-radius:14px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+    border-left:5px solid #2e7d32;
+}
+
+.stat-card h3{
+    font-size:2rem;
+    color:#2e7d32;
+    font-weight:700;
+}
+
+.stat-card p{
+    color:#666;
+    font-size:0.95rem;
+    margin-top:4px;
+}
+
+/* ===================== Features ===================== */
+
+.features{
+    background:#f2f8f1;
+    text-align:center;
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+    margin-top:40px;
+    text-align:left;
+}
+
+.card{
+    background:#fff;
+    padding:32px 28px;
+    border-radius:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
+}
+
+.card-icon{
+    font-size:2rem;
+    margin-bottom:14px;
+}
+
+.card h3{
+    color:#111;
+    font-size:1.1rem;
+    font-weight:600;
+    margin-bottom:12px;
+}
+
+.card p{
+    color:#666;
+    font-size:0.95rem;
+}
+
+/* ===================== Vision & Mission ===================== */
+
+.vision-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+.vision-box{
+    background:#fff;
+    border-radius:16px;
+    padding:40px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+}
+
+.vision-icon{
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.vision-box p{
+    color:#555;
+    font-size:17px;
+}
+
+.vision-box ul{
+    list-style:none;
+}
+
+.vision-box li{
+    position:relative;
+    padding:10px 0 10px 28px;
+    color:#444;
+    font-size:16px;
+    border-bottom:1px solid #eee;
+}
+
+.vision-box li:last-child{
+    border-bottom:none;
+}
+
+.vision-box li::before{
+    content:"✔";
+    position:absolute;
+    left:0;
+    color:#2e7d32;
+    font-weight:700;
+}
+
+/* ===================== Footer Text ===================== */
+
+.footer-text{
+    text-align:center;
+    background:#fff;
+}
+
+.footer-text h2{
+    text-align:center;
+}
+
+.footer-text p{
+    max-width:750px;
+    margin:auto;
+    font-size:18px;
+    color:#555;
+}
+
+/* ===================== Responsive ===================== */
+
+@media(max-width:900px){
+
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+
+    .about-stats{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:2.2rem;
+    }
+
+    .hero p{
+        font-size:1rem;
+    }
+
+    h2{
+        font-size:1.6rem;
+    }
+
+    .about-stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-text p{
+        font-size:16px;
+    }
+
+    .card{
+        padding:25px;
+    }
+}
+
+@media(max-width:480px){
+
+    .about-stats{
+        grid-template-columns:1fr;
+    }
+}
