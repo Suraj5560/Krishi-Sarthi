@@ -1,3 +1,5 @@
+require("dotenv").config();
+const { marked } = require("marked");
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -8,6 +10,12 @@ const session = require("express-session");
 const User = require("./models/users");
 const userRouters = require("./routes/users");
 const flash = require("connect-flash");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+
+
 // ===============================
 // Middleware
 // ===============================
@@ -28,26 +36,26 @@ app.set("views", path.join(__dirname, "views"));
 
 
 main()
-  .then(() => {
-    console.log("✅ Connected to MongoDB");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+    .then(() => {
+        console.log("✅ Connected to MongoDB");
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/krishiSarthi");
+    await mongoose.connect(process.env.MONGODB_URL);
 }
 
 const sessionOptions = {
-  secret : "sdfghju6redsdfgmnbvcxsaq23456789",
-  resave :false,
-  saveUninitialized :true,
-  cookie : {
-    expires: Date.now()+7*24*60*60*1000,
-    maxAge :7*24*60*60*1000,
-    httpOnly: true
-  }
+    secret: "sdfghju6redsdfgmnbvcxsaq23456789",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true
+    }
 }
 
 app.use(session(sessionOptions));
@@ -63,10 +71,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(
-  new LocalStrategy(
-    { usernameField: "email" },
-    User.authenticate()
-  )
+    new LocalStrategy(
+        { usernameField: "email" },
+        User.authenticate()
+    )
 );
 
 passport.serializeUser(User.serializeUser());
@@ -74,10 +82,10 @@ passport.deserializeUser(User.deserializeUser());
 
 // ✅ This middleware must come BEFORE routes
 app.use((req, res, next) => {
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  res.locals.currUser = req.user;
-  next();
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    res.locals.currUser = req.user;
+    next();
 });
 
 // ✅ Then register routes
@@ -136,10 +144,85 @@ app.get("/profit", (req, res) => {
     });
 });
 
+// estimation cost post method
+
+app.post("/cost", async (req, res) => {
+    const { crop, land, seed, fertilizer, labour, irrigation, others } = req.body;
+
+    const total = Number(seed) + Number(fertilizer) + Number(labour) + Number(irrigation) + Number(others);
+
+    const prompt = `
+You are a concise agricultural advisor for Indian farmers. Be brief and use bullet points only.
+
+Crop: "${crop}" | Land: ${land} acres | Total Cost: ₹${total}
+Costs: Seed ₹${seed}, Fertilizer ₹${fertilizer}, Labour ₹${labour}, Irrigation ₹${irrigation}, Others ₹${others}
+
+Respond with EXACTLY these 6 sections using markdown. Keep each section to 2-3 bullet points max:
+
+## ✅ Cost Assessment
+(Are these costs reasonable for ${crop} in India? Yes/No + 1 line reason)
+
+## ⚠️ Missing Costs
+(2-3 commonly missed expenses for this crop)
+
+## 📈 Yield & Profit
+(Expected yield in quintals and estimated profit for ${land} acres)
+
+## 💡 Cost-Saving Tips
+(3 specific tips for ${crop})
+
+## 🏛️ Government Schemes
+(2-3 relevant schemes/subsidies for ${crop} farmers in India)
+
+## 🔴 Key Risks
+(2-3 main risks to watch out for)
+
+Be short, factual, and farmer-friendly. No long paragraphs.
+    `;
+
+    try {
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+        const result = await model.generateContent(prompt);
+
+        const aiResponse = result.response.text();
+        const aiResponseHTML = marked(aiResponse);
+
+        res.render("cost", {
+            title: "Estimated cost",
+            total,
+            crop,
+            land,
+            seed,
+            fertilizer,
+            labour,
+            irrigation,
+            others,
+            aiResponse: aiResponseHTML
+        });
+
+
+    } catch (err) {
+        console.error("Gemini AI Error : ", err);
+        req.flash("error", "AI service failed . Please try again");
+        res.redirect("/cost");
+    }
+
+});
+
 // Estimated Cost
 app.get("/cost", (req, res) => {
     res.render("cost", {
-        title: "Estimated Cost"
+        title: "Estimated Cost",
+        total: null,
+        crop: null,
+        land: null,
+        seed: null,
+        fertilizer: null,
+        labour: null,
+        irrigation: null,
+        others: null,
+        aiResponse: null
     });
 });
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,169 +9,277 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/cost.css">
 </head>
+
 <body>
- 
-<%- include("partials/navbar") %>
-  <%- include("partials/flash") %> 
 
-<!-- Banner -->
+    <%- include("partials/navbar") %>
+        <%- include("partials/flash") %>
 
-<section class="page-banner">
+            <!-- Banner -->
 
-    <h1>🧮 Estimated Cost Calculator</h1>
+            <section class="page-banner">
 
-    <p>
-        Calculate the total cultivation cost before starting farming.
-    </p>
+                <h1>🧮 Estimated Cost Calculator</h1>
 
-</section>
+                <p>
+                    Calculate the total cultivation cost before starting farming.
+                </p>
 
-<!-- Cost Form -->
+            </section>
 
-<section class="form-section">
+            <!-- Cost Form -->
 
-<div class="form-card">
+            <section class="form-section">
 
-<h2>Enter Farming Expenses</h2>
+                <div class="form-card">
 
-<form action="/cost" method="POST">
+                    <h2>Enter Farming Expenses</h2>
 
-<div class="form-group">
-<label>Crop Name</label>
-<input type="text" name="crop" required>
-</div>
+                    <form action="/cost" method="POST">
 
-<div class="form-group">
-<label>Land Area (Acres)</label>
-<input type="number" step="0.1" name="land" required>
-</div>
+                        <div class="form-group">
+                            <label>Crop Name</label>
+                            <input type="text" name="crop" required>
+                        </div>
 
-<div class="form-group">
-<label>Seed Cost (₹)</label>
-<input type="number" name="seed" required>
-</div>
+                        <div class="form-group">
+                            <label>Land Area (Acres)</label>
+                            <input type="number" step="0.1" name="land" required>
+                        </div>
 
-<div class="form-group">
-<label>Fertilizer Cost (₹)</label>
-<input type="number" name="fertilizer" required>
-</div>
+                        <div class="form-group">
+                            <label>Seed Cost (₹)</label>
+                            <input type="number" name="seed" required>
+                        </div>
 
-<div class="form-group">
-<label>Labour Cost (₹)</label>
-<input type="number" name="labour" required>
-</div>
+                        <div class="form-group">
+                            <label>Fertilizer Cost (₹)</label>
+                            <input type="number" name="fertilizer" required>
+                        </div>
 
-<div class="form-group">
-<label>Irrigation Cost (₹)</label>
-<input type="number" name="irrigation" required>
-</div>
+                        <div class="form-group">
+                            <label>Labour Cost (₹)</label>
+                            <input type="number" name="labour" required>
+                        </div>
 
-<div class="form-group">
-<label>Other Expenses (₹)</label>
-<input type="number" name="others" required>
-</div>
+                        <div class="form-group">
+                            <label>Irrigation Cost (₹)</label>
+                            <input type="number" name="irrigation" required>
+                        </div>
 
-<button class="btn" type="submit">
-Calculate Cost
-</button>
+                        <div class="form-group">
+                            <label>Other Expenses (₹)</label>
+                            <input type="number" name="others" required>
+                        </div>
 
-</form>
+                        <button class="btn calc-btn" id="calcBtn" type="submit">
+                            <span class="calc-spinner" aria-hidden="true"></span>
+                            <span class="calc-label">Calculate Cost →</span>
+                        </button>
 
-</div>
+                    </form>
 
-</section>
+                </div>
 
-<!-- Result -->
+            </section>
 
-<section class="form-section">
+            <!-- Result -->
+            <% if(aiResponse){ %>
+            <section class="ai-result-section">
 
-<div class="result-card">
+                <!-- Hero Total Card -->
+                <div class="result-hero">
+                    <div class="result-hero-glow"></div>
+                    <div class="result-hero-inner">
+                        <div class="result-crop-badge">
+                            <span class="rh-icon">🌾</span>
+                            <div>
+                                <div class="rh-label">Crop</div>
+                                <div class="rh-crop-name"><%= crop %></div>
+                            </div>
+                        </div>
+                        <div class="result-total-display">
+                            <div class="rtd-label">Total Cultivation Cost</div>
+                            <div class="rtd-amount">₹<%= total.toLocaleString('en-IN') %></div>
+                            <div class="rtd-sub"><%= land %> Acres &nbsp;·&nbsp; <%= new Date().getFullYear() %> Season</div>
+                        </div>
+                        <div class="result-badges">
+                            <div class="rb-badge"><span>🌱</span><span>Planned</span></div>
+                            <div class="rb-badge amber"><span>📊</span><span>AI-Verified</span></div>
+                        </div>
+                    </div>
+                </div>
 
-<h3>Estimated Total Cost</h3>
+                <!-- Main Grid -->
+                <div class="result-main-grid">
 
-<p><strong>Total Estimated Cost:</strong> ₹0</p>
+                    <!-- Cost Breakdown Cards -->
+                    <div class="breakdown-panel">
+                        <div class="panel-header">
+                            <span class="panel-icon">📋</span>
+                            <h3>Cost Breakdown</h3>
+                        </div>
+                        <div class="breakdown-cards">
+                            <div class="bc-item" style="--accent:#3f9a44;">
+                                <div class="bc-emoji">🌱</div>
+                                <div class="bc-info">
+                                    <span class="bc-name">Seeds</span>
+                                    <span class="bc-pct" id="pct-seed"></span>
+                                </div>
+                                <div class="bc-amount">₹<%= seed.toLocaleString('en-IN') %></div>
+                                <div class="bc-bar"><div class="bc-fill" data-val="<%= seed %>" data-total="<%= total %>"></div></div>
+                            </div>
+                            <div class="bc-item" style="--accent:#2e7d32;">
+                                <div class="bc-emoji">🧪</div>
+                                <div class="bc-info">
+                                    <span class="bc-name">Fertilizer</span>
+                                    <span class="bc-pct" id="pct-fert"></span>
+                                </div>
+                                <div class="bc-amount">₹<%= fertilizer.toLocaleString('en-IN') %></div>
+                                <div class="bc-bar"><div class="bc-fill" data-val="<%= fertilizer %>" data-total="<%= total %>"></div></div>
+                            </div>
+                            <div class="bc-item" style="--accent:#e8a53d;">
+                                <div class="bc-emoji">👷</div>
+                                <div class="bc-info">
+                                    <span class="bc-name">Labour</span>
+                                    <span class="bc-pct" id="pct-lab"></span>
+                                </div>
+                                <div class="bc-amount">₹<%= labour.toLocaleString('en-IN') %></div>
+                                <div class="bc-bar"><div class="bc-fill" data-val="<%= labour %>" data-total="<%= total %>"></div></div>
+                            </div>
+                            <div class="bc-item" style="--accent:#1b7dbd;">
+                                <div class="bc-emoji">💧</div>
+                                <div class="bc-info">
+                                    <span class="bc-name">Irrigation</span>
+                                    <span class="bc-pct" id="pct-irr"></span>
+                                </div>
+                                <div class="bc-amount">₹<%= irrigation.toLocaleString('en-IN') %></div>
+                                <div class="bc-bar"><div class="bc-fill" data-val="<%= irrigation %>" data-total="<%= total %>"></div></div>
+                            </div>
+                            <div class="bc-item" style="--accent:#7c5cbf;">
+                                <div class="bc-emoji">📦</div>
+                                <div class="bc-info">
+                                    <span class="bc-name">Others</span>
+                                    <span class="bc-pct" id="pct-oth"></span>
+                                </div>
+                                <div class="bc-amount">₹<%= others.toLocaleString('en-IN') %></div>
+                                <div class="bc-bar"><div class="bc-fill" data-val="<%= others %>" data-total="<%= total %>"></div></div>
+                            </div>
+                        </div>
+                        <!-- Total footer -->
+                        <div class="breakdown-total">
+                            <span>💰 Grand Total</span>
+                            <span class="bt-amount">₹<%= total.toLocaleString('en-IN') %></span>
+                        </div>
+                    </div>
 
-<p>
-The total cultivation cost will be displayed here after calculation.
-</p>
+                    <!-- AI Analysis Card -->
+                    <div class="ai-panel">
+                        <div class="panel-header ai-header">
+                            <span class="panel-icon ai-icon">🤖</span>
+                            <h3>AI Analysis</h3>
+                            <span class="ai-chip">Gemini</span>
+                        </div>
+                        <div class="ai-response-content">
+                            <%- aiResponse %>
+                        </div>
+                    </div>
 
-</div>
+                </div>
 
-</section>
+            </section>
+            <% } %>
 
-<!-- Cost Categories -->
 
-<section class="features">
 
-<h2>Cost Breakdown</h2>
+                    <!-- Cost Categories -->
 
-<div class="feature-grid">
+                    <section class="features">
 
-<div class="feature-card">
-<i class="fas fa-seedling"></i>
-<h3>Seeds</h3>
-<p>High-quality seeds improve productivity.</p>
-</div>
+                        <h2>Cost Breakdown</h2>
 
-<div class="feature-card">
-<i class="fas fa-flask"></i>
-<h3>Fertilizers</h3>
-<p>Essential nutrients for healthy crop growth.</p>
-</div>
+                        <div class="feature-grid">
 
-<div class="feature-card">
-<i class="fas fa-users"></i>
-<h3>Labour</h3>
-<p>Estimate manpower expenses accurately.</p>
-</div>
+                            <div class="feature-card">
+                                <i class="fas fa-seedling"></i>
+                                <h3>Seeds</h3>
+                                <p>High-quality seeds improve productivity.</p>
+                            </div>
 
-<div class="feature-card">
-<i class="fas fa-tint"></i>
-<h3>Irrigation</h3>
-<p>Include water and irrigation system costs.</p>
-</div>
+                            <div class="feature-card">
+                                <i class="fas fa-flask"></i>
+                                <h3>Fertilizers</h3>
+                                <p>Essential nutrients for healthy crop growth.</p>
+                            </div>
 
-</div>
+                            <div class="feature-card">
+                                <i class="fas fa-users"></i>
+                                <h3>Labour</h3>
+                                <p>Estimate manpower expenses accurately.</p>
+                            </div>
 
-</section>
+                            <div class="feature-card">
+                                <i class="fas fa-tint"></i>
+                                <h3>Irrigation</h3>
+                                <p>Include water and irrigation system costs.</p>
+                            </div>
 
-<!-- Tips -->
+                        </div>
 
-<section class="features">
+                    </section>
 
-<h2>Cost Saving Tips</h2>
+                    <!-- Tips -->
 
-<div class="feature-grid">
+                    <section class="features">
 
-<div class="feature-card">
-<h3>💧 Save Water</h3>
-<p>Use drip irrigation to reduce water expenses.</p>
-</div>
+                        <h2>Cost Saving Tips</h2>
 
-<div class="feature-card">
-<h3>🌱 Buy Quality Seeds</h3>
-<p>Good seeds increase yield and reduce losses.</p>
-</div>
+                        <div class="feature-grid tips-grid">
 
-<div class="feature-card">
-<h3>📦 Plan Purchases</h3>
-<p>Purchase fertilizers and equipment in advance.</p>
-</div>
+                            <div class="feature-card">
+                                <h3>💧 Save Water</h3>
+                                <p>Use drip irrigation to reduce water expenses.</p>
+                            </div>
 
-</div>
+                            <div class="feature-card">
+                                <h3>🌱 Buy Quality Seeds</h3>
+                                <p>Good seeds increase yield and reduce losses.</p>
+                            </div>
 
-</section>
+                            <div class="feature-card">
+                                <h3>📦 Plan Purchases</h3>
+                                <p>Purchase fertilizers and equipment in advance.</p>
+                            </div>
 
-<%- include("partials/footer") %>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/js/main.js"></script>
-<script src="/js/cost.js"></script>
+                        </div>
+
+                    </section>
+
+                    <%- include("partials/footer") %>
+                        <script
+                            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+                        <script src="/js/main.js"></script>
+
+                        <script src="/js/cost.js"></script>
+
+    <!-- AI Loading Overlay -->
+    <div class="cost-loading-overlay" id="costLoadingOverlay" role="status" aria-live="polite">
+        <div class="clo-card">
+            <div class="clo-ring"></div>
+            <div class="clo-emoji">🌾</div>
+            <div class="clo-title">Analysing your farm data…</div>
+            <div class="clo-sub">Gemini AI is working</div>
+            <div class="clo-dots">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
 
 </body>
+
 </html>

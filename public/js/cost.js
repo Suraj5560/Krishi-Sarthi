@@ -1,135 +1,89 @@
 // =======================================
-// Krishi Sarthi
-// cost.js
+// Krishi Sarthi — cost.js
 // =======================================
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log("Cost Estimation Loaded");
+    // ── Refs ─────────────────────────────────────────────────
+    const form    = document.querySelector(".form-card > form");
+    const btn     = document.getElementById("calcBtn");
+    const label   = btn?.querySelector(".calc-label");
+    const overlay = document.getElementById("costLoadingOverlay");
 
-    const costForm = document.querySelector("form[action='/cost']");
+    // ── Loading messages that cycle on the overlay ────────────
+    const messages = [
+        "Analysing your farm data…",
+        "Calculating input costs…",
+        "Running AI crop model…",
+        "Generating recommendations…",
+        "Almost there…",
+    ];
 
-    if (!costForm) return;
+    // ── Form submit → show loading ────────────────────────────
+    if (form && btn) {
+        form.addEventListener("submit", (e) => {
+            // Let browser do native HTML5 validation first
+            if (!form.checkValidity()) return;
 
-    costForm.addEventListener("submit", function (e) {
+            // Activate button loading state
+            btn.classList.add("is-loading");
+            btn.disabled = true;
+            if (label) label.textContent = "Calculating…";
 
-        e.preventDefault();
-
-        // Input Fields
-        const seed = Number(document.querySelector("input[name='seed']").value);
-        const fertilizer = Number(document.querySelector("input[name='fertilizer']").value);
-        const labour = Number(document.querySelector("input[name='labour']").value);
-        const irrigation = Number(document.querySelector("input[name='irrigation']").value);
-        const pesticide = Number(document.querySelector("input[name='pesticide']").value);
-        const other = Number(document.querySelector("input[name='other']").value);
-
-        // Validation
-        if (
-            isNaN(seed) ||
-            isNaN(fertilizer) ||
-            isNaN(labour) ||
-            isNaN(irrigation) ||
-            isNaN(pesticide) ||
-            isNaN(other)
-        ) {
-
-            showToast("Please enter all cost values.");
-
-            return;
-
-        }
-
-        showLoader();
-
-        setTimeout(() => {
-
-            hideLoader();
-
-            const total =
-                seed +
-                fertilizer +
-                labour +
-                irrigation +
-                pesticide +
-                other;
-
-            const result = document.getElementById("costResult");
-
-            if (result) {
-
-                result.innerHTML = `
-                    <h3>Estimated Cost</h3>
-
-                    <table class="result-table">
-                        <tr>
-                            <td>Seed</td>
-                            <td>₹${seed}</td>
-                        </tr>
-
-                        <tr>
-                            <td>Fertilizer</td>
-                            <td>₹${fertilizer}</td>
-                        </tr>
-
-                        <tr>
-                            <td>Labour</td>
-                            <td>₹${labour}</td>
-                        </tr>
-
-                        <tr>
-                            <td>Irrigation</td>
-                            <td>₹${irrigation}</td>
-                        </tr>
-
-                        <tr>
-                            <td>Pesticide</td>
-                            <td>₹${pesticide}</td>
-                        </tr>
-
-                        <tr>
-                            <td>Other Expenses</td>
-                            <td>₹${other}</td>
-                        </tr>
-
-                        <tr>
-                            <th>Total Cost</th>
-                            <th>₹${total}</th>
-                        </tr>
-                    </table>
-                `;
-
+            // Show overlay
+            if (overlay) {
+                overlay.classList.add("active");
+                cycleMessages(overlay.querySelector(".clo-title"));
             }
-
-            showToast("Cost Estimated Successfully");
-
-        }, 1500);
-
-    });
-
-    // ==========================
-    // Reset Button
-    // ==========================
-
-    const resetBtn = document.getElementById("resetCost");
-
-    if (resetBtn) {
-
-        resetBtn.addEventListener("click", () => {
-
-            costForm.reset();
-
-            const result = document.getElementById("costResult");
-
-            if (result) {
-
-                result.innerHTML = "";
-
-            }
-
-            showToast("Form Reset");
-
         });
-
     }
 
+    // ── Cycle overlay messages ────────────────────────────────
+    function cycleMessages(el) {
+        if (!el) return;
+        let i = 0;
+        setInterval(() => {
+            i = (i + 1) % messages.length;
+            el.style.opacity = "0";
+            el.style.transition = "opacity .3s";
+            setTimeout(() => {
+                el.textContent = messages[i];
+                el.style.opacity = "1";
+            }, 320);
+        }, 2200);
+    }
+
+    // ── Animated progress bars ────────────────────────────────
+    const fills = document.querySelectorAll(".bc-fill");
+
+    if (fills.length) {
+        const animate = () => {
+            fills.forEach((el) => {
+                const val   = parseFloat(el.dataset.val)   || 0;
+                const total = parseFloat(el.dataset.total) || 1;
+                const pct   = Math.min((val / total) * 100, 100).toFixed(1);
+
+                requestAnimationFrame(() => { el.style.width = pct + "%"; });
+
+                const item = el.closest(".bc-item");
+                if (item) {
+                    const pctEl = item.querySelector(".bc-pct");
+                    if (pctEl) pctEl.textContent = pct + "%";
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) { animate(); observer.disconnect(); }
+                });
+            },
+            { threshold: 0.2 }
+        );
+
+        const panel = document.querySelector(".breakdown-panel");
+        if (panel) observer.observe(panel);
+        else animate();
+    }
 });
